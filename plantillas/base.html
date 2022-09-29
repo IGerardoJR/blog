@@ -23,6 +23,7 @@
             {% else %}
             <p>No ha iniciado sesion.</p>
             <a href="{% url 'login' %}">Iniciar sesion</a>
+            <a href="{% url 'signup' %}">Registrarse</a>
             {% endif %}
             {% block content %} 
           

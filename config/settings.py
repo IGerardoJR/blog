@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-um7@6%(1k$ul672%t#0mq7_!a$8sw&(p2va$i7$=c9u_389i-+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['.herokuapp.com','localhost','127.0.0.1']
 
 
 # Application definition
@@ -37,11 +37,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'whitenoise.runserver_nostatic',
     'blog',
     'cuentas',
 ]
 
 MIDDLEWARE = [
+    'whitenoise.middleware.WhiteNoiseMiddleware', # NEW
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -119,6 +121,9 @@ USE_TZ = True
 
 STATIC_URL = '/estaticos/'
 STATICFILES_DIRS = [str(BASE_DIR.joinpath('estaticos'))]
+STATIC_ROOT = STATIC_ROOT = str(BASE_DIR.joinpath('archivosestaticos'))
+#STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 LOGIN_REDIRECT_URL = 'inicio'
 LOGOUT_REDIRECT_URL = 'inicio'
